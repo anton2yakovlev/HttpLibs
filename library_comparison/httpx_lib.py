@@ -12,7 +12,7 @@ def with_async_client(func):
     """Декоратор для автоматического создания AsyncClient"""
     @wraps(func)
     async def wrapper(*args, **kwargs):
-        async with httpx.AsyncClient() as client:
+        async with httpx.AsyncClient(http2=True) as client:
             return await func(client, *args, **kwargs)
     return wrapper
 
